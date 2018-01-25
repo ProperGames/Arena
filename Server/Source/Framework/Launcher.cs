@@ -10,19 +10,29 @@ namespace Server
             List<string> parameters = new List<string>(args);
 
             Server.Framework.Server server = new Server.Framework.Server();
-            Tuple<bool, List<Tools.Message>> initialisationResult = server.Initialise(parameters);
+            Common.Tools.ProcessResult result = server.StartUp(parameters);
+            PrintMessagesToConsole(result.GetDetails());
 
-            foreach (Tools.Message message in initialisationResult.Item2)
+            result = server.ShutDown();
+            PrintMessagesToConsole(result.GetDetails());
+
+            Console.WriteLine("Press enter to exit");
+            Console.ReadLine();
+        }
+
+        static void PrintMessagesToConsole(List<Common.Tools.Message> messages)
+        {
+            foreach (Common.Tools.Message message in messages)
             {
                 switch (message.GetMessageType())
                 {
-                    case Tools.Message.Types.INFO:
+                    case Common.Tools.Message.Types.INFO:
                         Console.WriteLine("INFO : " + message.GetMessage());
                         break;
-                    case Tools.Message.Types.WARNING:
+                    case Common.Tools.Message.Types.WARNING:
                         Console.WriteLine("WARN : " + message.GetMessage());
                         break;
-                    case Tools.Message.Types.ERROR:
+                    case Common.Tools.Message.Types.ERROR:
                         Console.WriteLine("ERROR: " + message.GetMessage());
                         break;
                     default:
@@ -30,9 +40,6 @@ namespace Server
                         break;
                 }
             }
-
-            Console.WriteLine("Press any key to exit");
-            Console.ReadLine();
         }
     }
 }

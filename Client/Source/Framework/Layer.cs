@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Client.Framework
 {
     abstract class Layer
     {
-        private bool m_bSuccessfullyInitialised;
+        private bool m_bInitialised;
         private List<string> m_parameters;
         private LayerConfig m_config;
 
         protected Layer()
         {
-            m_bSuccessfullyInitialised = false;
+            m_bInitialised = false;
             m_config = new LayerConfig();
         }
 
         protected Layer(LayerConfig config)
         {
-            m_bSuccessfullyInitialised = false;
+            m_bInitialised = false;
             m_config = config;
         }
 
@@ -26,18 +25,29 @@ namespace Client.Framework
             return m_config.GetName();
         }
 
-        public Tuple<bool, List<Tools.Message>> Initialise(List<string> parameters)
+        public Common.Tools.ProcessResult StartUp(List<string> parameters)
         {
-            if (m_bSuccessfullyInitialised)
+            if (m_bInitialised)
             {
-                return new Tuple<bool, List<Tools.Message>>(false, new List<Tools.Message>() {
-                    new Tools.Message(Tools.Message.Types.WARNING, "Already initialised") });
+                return new Common.Tools.ProcessResult(false, new List<Common.Tools.Message>() {
+                    new Common.Tools.Message(Common.Tools.Message.Types.WARNING, "Already initialised") });
             }
 
             m_parameters = parameters;
-            Tuple<bool, List<Tools.Message>> result = Initialise();
-            m_bSuccessfullyInitialised = result.Item1;
+            Common.Tools.ProcessResult result = StartUpInternal();
+            m_bInitialised = result.WasSuccessful();
             return result;
+        }
+
+        public Common.Tools.ProcessResult ShutDown()
+        {
+            if (!m_bInitialised)
+            {
+                return new Common.Tools.ProcessResult(false, new List<Common.Tools.Message> {
+                    new Common.Tools.Message(Common.Tools.Message.Types.WARNING, "Not yet initialised") });
+            }
+
+            return ShutDownInternal();
         }
 
         protected List<string> GetParameters()
@@ -45,6 +55,7 @@ namespace Client.Framework
             return m_parameters;
         }
 
-        protected abstract Tuple<bool, List<Tools.Message>> Initialise();
+        protected abstract Common.Tools.ProcessResult StartUpInternal();
+        protected abstract Common.Tools.ProcessResult ShutDownInternal();
     }
 }

@@ -5,26 +5,23 @@ namespace Server.Framework
 {
     class Server
     {
-        private bool m_bSuccessfullyInitialised;
+        private bool m_bInitialised;
         private List<Layer> m_layers;
 
         public Server()
         {
-            m_bSuccessfullyInitialised = false;
+            m_bInitialised = false;
             m_layers = new List<Layer>();
         }
         
-        public Tuple<bool, List<Tools.Message>> Initialise(List<string> parameters)
+        public Common.Tools.ProcessResult StartUp(List<string> parameters)
         {
-            if (m_bSuccessfullyInitialised)
+            if (m_bInitialised)
             {
-                return new Tuple<bool, List<Tools.Message>>(false, new List<Tools.Message>() {
-                    new Tools.Message(Tools.Message.Types.WARNING, "Already initialised") });
+                return new Common.Tools.ProcessResult(false, new List<Common.Tools.Message>() {
+                    new Common.Tools.Message(Common.Tools.Message.Types.WARNING, "Already initialised") });
             }
 
-            bool bInitialisationSucceeded = true;
-            List<Tools.Message> messages = new List<Tools.Message>();
-            
             if (parameters == null)
             {
                 parameters = new List<string>();
@@ -35,28 +32,58 @@ namespace Server.Framework
             m_layers.Add(new Management.Layer(new LayerConfig("Management")));
             m_layers.Add(new Game.Layer(new LayerConfig("Game")));
 
+            bool bInitialisationSucceeded = true;
+            List<Common.Tools.Message> messages = new List<Common.Tools.Message>();           
             foreach(Layer layer in m_layers)
             {
-                Tuple<bool, List<Tools.Message>> layerInitialisationResult = layer.Initialise(parameters);
+                Common.Tools.ProcessResult result = layer.StartUp(parameters);
                 string sLayerName = layer.GetName();
-                if (!layerInitialisationResult.Item1)
+                if (!result.WasSuccessful())
                 {
                     bInitialisationSucceeded = false;
-                    messages.Add(new Tools.Message(Tools.Message.Types.ERROR, "Failed to initialise layer '" + sLayerName + "'"));
+                    messages.Add(new Common.Tools.Message(Common.Tools.Message.Types.ERROR, "Failed to initialise layer '" + sLayerName + "'"));
                 }
 
-                foreach (Tools.Message message in layerInitialisationResult.Item2)
+                foreach (Common.Tools.Message message in result.GetDetails())
                 {
-                    messages.Add(new Tools.Message(message.GetMessageType(), sLayerName + ": " + message.GetMessage()));
+                    messages.Add(new Common.Tools.Message(message.GetMessageType(), sLayerName + ": " + message.GetMessage()));
                 }
             }
 
             if (bInitialisationSucceeded)
             {
-                m_bSuccessfullyInitialised = true;
+                m_bInitialised = true;
             }
 
-            return new Tuple<bool, List<Tools.Message>>(bInitialisationSucceeded, messages);
+            return new Common.Tools.ProcessResult(bInitialisationSucceeded, messages);
+        }
+
+        public Common.Tools.ProcessResult ShutDown()
+        {
+            if (!m_bInitialised)
+            {
+                return new Common.Tools.ProcessResult(false, new List<Common.Tools.Message> {
+                    new Common.Tools.Message(Common.Tools.Message.Types.WARNING, "Not yet initialised") });
+            }
+
+            bool bSuccess = true;
+            List<Common.Tools.Message> messages = new List<Common.Tools.Message>();
+            foreach (Layer layer in m_layers)
+            {
+                Common.Tools.ProcessResult result = layer.ShutDown();
+                string sLayerName = layer.GetName();
+                if (!result.WasSuccessful())
+                {
+                    bSuccess = false;
+                }
+
+                foreach (Common.Tools.Message message in result.GetDetails())
+                {
+                    messages.Add(new Common.Tools.Message(message.GetMessageType(), sLayerName + ": " + message.GetMessage()));
+                }
+            }
+
+            return new Common.Tools.ProcessResult(bSuccess, messages);
         }
     }
 }

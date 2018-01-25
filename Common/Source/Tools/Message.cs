@@ -1,4 +1,4 @@
-﻿namespace Tools
+﻿namespace Common.Tools
 {
     public class Message
     {
@@ -32,7 +32,7 @@
         public Message(Types type, string sMessage)
         {
             m_type = type;
-            m_sMessage = sMessage == null ? string.Empty : sMessage;
+            m_sMessage = (sMessage == null ? string.Empty : sMessage);
         }
 
         /// <summary>

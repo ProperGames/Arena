@@ -11,19 +11,33 @@ namespace Client
             List<string> parameters = new List<string>(args);
 
             Client.Framework.Client client = new Client.Framework.Client();
-            Tuple<bool, List<Tools.Message>> initialisationResult = client.Initialise(parameters);
+            Common.Tools.ProcessResult result = client.StartUp(parameters);
+            PrintMessagesToConsole(result.GetDetails());
 
-            foreach (Tools.Message message in initialisationResult.Item2)
+            client.Run();
+
+            result = client.ShutDown();
+            PrintMessagesToConsole(result.GetDetails());
+
+            client.Dispose();
+
+            Console.WriteLine("Press enter to exit");
+            Console.ReadLine();
+        }
+
+        static void PrintMessagesToConsole(List<Common.Tools.Message> messages)
+        {
+            foreach (Common.Tools.Message message in messages)
             {
                 switch (message.GetMessageType())
                 {
-                    case Tools.Message.Types.INFO:
+                    case Common.Tools.Message.Types.INFO:
                         Console.WriteLine("INFO : " + message.GetMessage());
                         break;
-                    case Tools.Message.Types.WARNING:
+                    case Common.Tools.Message.Types.WARNING:
                         Console.WriteLine("WARN : " + message.GetMessage());
                         break;
-                    case Tools.Message.Types.ERROR:
+                    case Common.Tools.Message.Types.ERROR:
                         Console.WriteLine("ERROR: " + message.GetMessage());
                         break;
                     default:
@@ -31,12 +45,6 @@ namespace Client
                         break;
                 }
             }
-
-            client.Run();
-            client.Dispose();
-
-            Console.WriteLine("Press any key to exit");
-            Console.ReadLine();
         }
     }
 }

@@ -115,12 +115,29 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tools\Tools.csproj">
-      <Project>{74ffaed3-d86a-483f-8daa-493440760631}</Project>
-      <Name>Tools</Name>
+    <Folder Include="Source\Game\AbilityAndEffect\" />
+    <Folder Include="Source\Game\Collision\" />
+    <Folder Include="Source\Game\EntityComponentSystem\" />
+    <Folder Include="Source\Game\Environment\" />
+    <Folder Include="Source\Game\Event\" />
+    <Folder Include="Source\Game\Flow\" />
+    <Folder Include="Source\IO\Database\" />
+    <Folder Include="Source\IO\File\" />
+    <Folder Include="Source\IO\Network\" />
+    <Folder Include="Source\Management\Access\" />
+    <Folder Include="Source\Management\Account\" />
+    <Folder Include="Source\Management\Command\" />
+    <Folder Include="Source\Management\Configuration\" />
+    <Folder Include="Source\System\ObjectPool\" />
+    <Folder Include="Source\System\Resource\" />
+    <Folder Include="Source\System\Timing\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{49ff4d5c-5160-4080-91b4-87f9de10125c}</Project>
+      <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

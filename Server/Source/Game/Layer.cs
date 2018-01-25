@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Server.Game
+﻿namespace Server.Game
 {
     class Layer : Framework.Layer
     {
@@ -9,9 +6,14 @@ namespace Server.Game
         {
         }
 
-        protected override Tuple<bool, List<Tools.Message>> Initialise()
+        protected override Common.Tools.ProcessResult StartUpInternal()
         {
-            return new Tuple<bool, List<Tools.Message>>(true, new List<Tools.Message>() { });
+            return new Common.Tools.ProcessResult(true);
+        }
+
+        protected override Common.Tools.ProcessResult ShutDownInternal()
+        {
+            return new Common.Tools.ProcessResult(true);
         }
     }
 }
