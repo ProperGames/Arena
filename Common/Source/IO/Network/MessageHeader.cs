@@ -1,4 +1,4 @@
-﻿namespace Common.Network
+﻿namespace Common.IO.Network
 {
     /// <summary>
     /// A network message header is a small object prepended to the start of each packet transferred across

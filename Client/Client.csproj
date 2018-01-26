@@ -124,7 +124,7 @@
     <Folder Include="Source\Game\Environment\" />
     <Folder Include="Source\Game\Graphics\" />
     <Folder Include="Source\Game\UI\" />
-    <Folder Include="Source\IO\File\" />
+    <Folder Include="Source\IO\Disk\" />
     <Folder Include="Source\IO\Network\" />
     <Folder Include="Source\System\ObjectPool\" />
     <Folder Include="Source\System\Resouce\" />
