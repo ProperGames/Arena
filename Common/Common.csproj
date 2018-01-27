@@ -54,6 +54,7 @@
     <Compile Include="Source\System\Timing\TimerManager.cs" />
     <Compile Include="Source\Tools\ProcessResult.cs" />
     <Compile Include="Source\Tools\Message.cs" />
+    <Compile Include="Source\Tools\UnitConversions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
