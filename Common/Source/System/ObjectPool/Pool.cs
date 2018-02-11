@@ -2,7 +2,7 @@
 
 namespace Common.System.ObjectPool
 {
-    public class Pool<T> where T : class, new()
+    internal class Pool<T> where T : class, new()
     {
         private List<T> m_objects = new List<T>();
 

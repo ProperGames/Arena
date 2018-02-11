@@ -45,16 +45,29 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Source\Environment\Addon\System.cs" />
+    <Compile Include="Source\Environment\Audio\System.cs" />
+    <Compile Include="Source\Environment\EntityComponent\System.cs" />
+    <Compile Include="Source\Environment\Environment.cs" />
+    <Compile Include="Source\Environment\EnvironmentConfig.cs" />
+    <Compile Include="Source\Environment\EnvironmentLoader.cs" />
+    <Compile Include="Source\Environment\Flow\System.cs" />
+    <Compile Include="Source\Environment\Graphics\System.cs" />
+    <Compile Include="Source\Environment\LayerConfig.cs" />
+    <Compile Include="Source\Environment\Physics\System.cs" />
+    <Compile Include="Source\Environment\Subsystem.cs" />
+    <Compile Include="Source\Environment\UI\System.cs" />
     <Compile Include="Source\Framework\Client.cs" />
     <Compile Include="Source\Framework\Launcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Framework\Layer.cs" />
     <Compile Include="Source\Framework\LayerConfig.cs" />
-    <Compile Include="Source\Game\AddonHost\Addon.cs" />
-    <Compile Include="Source\Game\AddonHost\AddonConfig.cs" />
-    <Compile Include="Source\Game\Layer.cs" />
+    <Compile Include="Source\Environment\Addon\Addon.cs" />
+    <Compile Include="Source\Environment\Addon\AddonConfig.cs" />
+    <Compile Include="Source\Environment\Layer.cs" />
     <Compile Include="Source\IO\Layer.cs" />
     <Compile Include="Source\System\Layer.cs" />
+    <Compile Include="Source\System\LayerConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -116,14 +129,8 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Source\Addon\AbilityAndEffect\" />
-    <Folder Include="Source\Addon\Initialisation\" />
+    <Folder Include="Source\Addon\Ability\" />
     <Folder Include="Source\Addon\Weather\" />
-    <Folder Include="Source\Game\Audio\" />
-    <Folder Include="Source\Game\Collisions\" />
-    <Folder Include="Source\Game\Environment\" />
-    <Folder Include="Source\Game\Graphics\" />
-    <Folder Include="Source\Game\UI\" />
     <Folder Include="Source\IO\Disk\" />
     <Folder Include="Source\IO\Network\" />
     <Folder Include="Source\System\ObjectPool\" />

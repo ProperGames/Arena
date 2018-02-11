@@ -1,8 +1,12 @@
 ﻿namespace Common.System.Timing
 {
-    public class TimerManager
+    internal class TimerManager
     {
         public TimerManager()
+        {
+        }
+
+        public TimerManager(TimerManagerConfig config)
         {
         }
     }

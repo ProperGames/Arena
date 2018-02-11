@@ -1,8 +1,8 @@
 ﻿namespace Common.System.Resource
 {
-    internal class Manager
+    internal class ManagerConfig
     {
-        public Manager()
+        public ManagerConfig()
         {
         }
     }

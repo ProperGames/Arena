@@ -14,10 +14,13 @@ namespace Client
             Common.Tools.ProcessResult result = client.StartUp(parameters);
             PrintMessagesToConsole(result.GetDetails());
 
-            client.Run();
+            if (result.WasSuccessful())
+            {
+                client.Run();
 
-            result = client.ShutDown();
-            PrintMessagesToConsole(result.GetDetails());
+                result = client.ShutDown();
+                PrintMessagesToConsole(result.GetDetails());
+            }
 
             client.Dispose();
 

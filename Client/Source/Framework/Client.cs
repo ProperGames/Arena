@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
 
 namespace Client.Framework
@@ -39,9 +38,16 @@ namespace Client.Framework
                 parameters = new List<string>();
             }
 
-            m_layers.Add(new IO.Layer(new LayerConfig("IO")));
-            m_layers.Add(new System.Layer(new LayerConfig("System")));
-            m_layers.Add(new Game.Layer(new LayerConfig("Game")));
+            IO.Layer ioLayer = new IO.Layer(new LayerConfig("IO"));
+            System.Layer systemLayer = new System.Layer(new System.LayerConfig("System", ioLayer));
+            Environment.Layer environmentLayer = new Environment.Layer(new Environment.LayerConfig(
+                "Environment", 
+                ioLayer, 
+                systemLayer));
+
+            m_layers.Add(ioLayer);
+            m_layers.Add(systemLayer);
+            m_layers.Add(environmentLayer);
 
             bool bInitialisationSucceeded = true;
             List<Common.Tools.Message> messages = new List<Common.Tools.Message>();
@@ -93,6 +99,7 @@ namespace Client.Framework
                     messages.Add(new Common.Tools.Message(message.GetMessageType(), sLayerName + ": " + message.GetMessage()));
                 }
             }
+            m_layers.Clear();
 
             return new Common.Tools.ProcessResult(bSuccess, messages);
         }
@@ -137,7 +144,10 @@ namespace Client.Framework
                 Exit();
             }
 
-            // TODO: Add your update logic here
+            foreach (Layer layer in m_layers)
+            {
+                layer.OnUpdate(gameTime);
+            }
 
             base.Update(gameTime);
         }
@@ -149,8 +159,8 @@ namespace Client.Framework
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
+            
+            // Forward call to active environments graphics manager
 
             base.Draw(gameTime);
         }

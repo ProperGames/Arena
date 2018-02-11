@@ -1,24 +1,20 @@
 ﻿using System.Collections.Generic;
 
-namespace Server.Management
+namespace Server.Environment
 {
     class Layer : Framework.Layer
     {
-        private Access.Manager m_accessManager;
-        private Account.Manager m_accountManager;
-        private Command.Manager m_commandManager;
-        private Configuration.Manager m_configurationManager;
-        private IO.Layer m_ioLayer;
-        private System.Layer m_systemLayer;
+        private readonly IO.Layer m_ioLayer;
+        private readonly System.Layer m_systemLayer;
+        private readonly Management.Layer m_managementLayer;
+        private readonly Manager m_environmentManager;
 
         public Layer(LayerConfig config) : base(config)
         {
-            m_accessManager = new Access.Manager();
-            m_accountManager = new Account.Manager();
-            m_commandManager = new Command.Manager();
-            m_configurationManager = new Configuration.Manager();
+            m_environmentManager = new Manager(new ManagerConfig());
             m_ioLayer = config.GetIoLayer();
             m_systemLayer = config.GetSystemLayer();
+            m_managementLayer = config.GetManagementLayer();
         }
 
         protected override Common.Tools.ProcessResult StartUpInternal()
@@ -32,12 +28,17 @@ namespace Server.Management
                 messages.Add(new Common.Tools.Message(Common.Tools.Message.Types.ERROR,
                     "Reference to IO layer required"));
             }
-
             if (m_systemLayer == null)
             {
                 bSuccess = false;
                 messages.Add(new Common.Tools.Message(Common.Tools.Message.Types.ERROR,
                     "Reference to system layer required"));
+            }
+            if (m_managementLayer == null)
+            {
+                bSuccess = false;
+                messages.Add(new Common.Tools.Message(Common.Tools.Message.Types.ERROR,
+                    "Reference to management layer required"));
             }
 
             return new Common.Tools.ProcessResult(bSuccess, messages);

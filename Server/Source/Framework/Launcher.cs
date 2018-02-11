@@ -13,8 +13,11 @@ namespace Server
             Common.Tools.ProcessResult result = server.StartUp(parameters);
             PrintMessagesToConsole(result.GetDetails());
 
-            result = server.ShutDown();
-            PrintMessagesToConsole(result.GetDetails());
+            if (result.WasSuccessful())
+            {
+                result = server.ShutDown();
+                PrintMessagesToConsole(result.GetDetails());
+            }
 
             Console.WriteLine("Press enter to exit");
             Console.ReadLine();

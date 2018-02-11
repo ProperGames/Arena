@@ -1,8 +1,8 @@
 ﻿namespace Common.System.ObjectPool
 {
-    internal class PoolConfig
+    public class SystemConfig
     {
-        public PoolConfig()
+        public SystemConfig()
         {
         }
     }

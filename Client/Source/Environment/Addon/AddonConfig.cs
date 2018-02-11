@@ -1,4 +1,4 @@
-﻿namespace Client.Game.AddonHost
+﻿namespace Client.Environment.Addon
 {
     public class AddonConfig
     {

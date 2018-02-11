@@ -1,4 +1,4 @@
-﻿namespace Client.Game.AddonHost
+﻿namespace Client.Environment.Addon
 {
     /// <summary>
     /// The base class for all addons.

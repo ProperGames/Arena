@@ -1,4 +1,6 @@
-﻿namespace Client.IO
+﻿using Microsoft.Xna.Framework;
+
+namespace Client.IO
 {
     class Layer : Framework.Layer
     {
@@ -19,6 +21,10 @@
         protected override Common.Tools.ProcessResult ShutDownInternal()
         {
             return new Common.Tools.ProcessResult(true);
+        }
+
+        public override void OnUpdate(GameTime gameTime)
+        {
         }
     }
 }

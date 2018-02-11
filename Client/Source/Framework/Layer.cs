@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace Client.Framework
 {
@@ -55,6 +56,7 @@ namespace Client.Framework
             return m_parameters;
         }
 
+        public abstract void OnUpdate(GameTime gameTime);
         protected abstract Common.Tools.ProcessResult StartUpInternal();
         protected abstract Common.Tools.ProcessResult ShutDownInternal();
     }

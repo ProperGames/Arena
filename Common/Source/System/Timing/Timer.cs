@@ -7,7 +7,6 @@
         /// </summary>
         public Timer()
         {
-
         }
 
         /// <summary>
@@ -16,7 +15,6 @@
         /// <param name="config">The desired configuration</param>
         public Timer(TimerConfig config)
         {
-
         }
     }
 }
