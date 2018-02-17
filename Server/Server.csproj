@@ -62,10 +62,8 @@
     <Compile Include="Source\Environment\Layer.cs" />
     <Compile Include="Source\IO\Database\Interface.cs" />
     <Compile Include="Source\IO\Layer.cs" />
-    <Compile Include="Source\Management\Access\Manager.cs" />
-    <Compile Include="Source\Management\Account\Manager.cs" />
+    <Compile Include="Source\Management\User\Manager.cs" />
     <Compile Include="Source\Management\Command\Manager.cs" />
-    <Compile Include="Source\Management\Configuration\Manager.cs" />
     <Compile Include="Source\Management\Layer.cs" />
     <Compile Include="Source\Management\LayerConfig.cs" />
     <Compile Include="Source\System\Layer.cs" />
@@ -135,7 +133,7 @@
     <Folder Include="Source\IO\Network\" />
     <Folder Include="Source\System\ObjectPool\" />
     <Folder Include="Source\System\Resource\" />
-    <Folder Include="Source\System\Timing\" />
+    <Folder Include="Source\System\Time\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

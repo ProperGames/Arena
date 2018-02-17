@@ -1,4 +1,4 @@
-﻿namespace Common.System.Timing
+﻿namespace Common.System.Time
 {
     internal class TimerManager
     {

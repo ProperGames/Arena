@@ -7,7 +7,7 @@ namespace Client.System
     {
         private Common.System.ObjectPool.System m_objectPoolSystem;
         private Common.System.Resource.System m_resourceSystem;
-        private Common.System.Timing.System m_timerSystem;
+        private Common.System.Time.System m_timerSystem;
         private Common.System.Event.System m_eventSystem;
         private IO.Layer m_ioLayer;
 
@@ -15,7 +15,7 @@ namespace Client.System
         {
             m_objectPoolSystem = new Common.System.ObjectPool.System();
             m_resourceSystem = new Common.System.Resource.System();
-            m_timerSystem = new Common.System.Timing.System();
+            m_timerSystem = new Common.System.Time.System();
             m_eventSystem = new Common.System.Event.System();
             m_ioLayer = config.GetIoLayer();
         }

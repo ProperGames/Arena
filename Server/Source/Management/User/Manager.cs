@@ -1,4 +1,4 @@
-﻿namespace Server.Management.Access
+﻿namespace Server.Management.User
 {
     public class Manager
     {

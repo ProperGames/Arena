@@ -135,7 +135,7 @@
     <Folder Include="Source\IO\Network\" />
     <Folder Include="Source\System\ObjectPool\" />
     <Folder Include="Source\System\Resouce\" />
-    <Folder Include="Source\System\Timing\" />
+    <Folder Include="Source\System\Time\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
