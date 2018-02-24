@@ -67,6 +67,7 @@
     <Compile Include="Source\System\Time\TimerManagerConfig.cs" />
     <Compile Include="Source\Tools\ProcessResult.cs" />
     <Compile Include="Source\Tools\Message.cs" />
+    <Compile Include="Source\Tools\Register.cs" />
     <Compile Include="Source\Tools\UnitConversions.cs" />
   </ItemGroup>
   <ItemGroup />

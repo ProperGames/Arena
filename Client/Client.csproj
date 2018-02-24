@@ -129,8 +129,7 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Source\Addon\Ability\" />
-    <Folder Include="Source\Addon\Weather\" />
+    <Folder Include="Source\Addon\" />
     <Folder Include="Source\IO\Disk\" />
     <Folder Include="Source\IO\Network\" />
     <Folder Include="Source\System\ObjectPool\" />
